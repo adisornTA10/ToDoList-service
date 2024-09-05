@@ -6,8 +6,11 @@ import { appConfig } from './config/app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './data/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
-import { ToDoListUsersService } from './api/service/todolist-users.service';
 import { ToDoListUsersController } from './api/todolist-users.controller';
+import { ToDoListUsersService } from './api/service/todolist-users.service';
+import { ProfileEntity } from './data/entity/profile.entity';
+import { TodoEntity } from './data/entity/todo.entity';
+import { TopicEntity } from './data/entity/topic.entity';
 
 @Module({
   imports: [
@@ -16,7 +19,7 @@ import { ToDoListUsersController } from './api/todolist-users.controller';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRoot(appConfig),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, ProfileEntity, TodoEntity, TopicEntity]),
     AuthModule,
   ],
   controllers: [AppController, ToDoListUsersController],

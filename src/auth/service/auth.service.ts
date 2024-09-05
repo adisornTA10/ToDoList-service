@@ -19,8 +19,8 @@ export class AuthService {
       const responseVo = await this.userService.findByUsername(username);
       const user: UserEntity | undefined = responseVo.getData();
       
-      if (user && await bcrypt.compare(pass, user.passwordHash)) { 
-        const { passwordHash, ...result } = user;
+      if (user && await bcrypt.compare(pass, user.getPasswordHash())) { 
+        const { getPasswordHash , ...result } = user;
         return result;
       }
       return null;

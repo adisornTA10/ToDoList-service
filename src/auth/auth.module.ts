@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { AuthService } from './service/auth.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { LocalStrategy } from './strategy/local.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/data/entity/user.entity';
 import { ToDoListUsersService } from 'src/api/service/todolist-users.service';
+import { AuthService } from './service/auth.service';
+import { ProfileEntity } from 'src/data/entity/profile.entity';
+import { TopicEntity } from 'src/data/entity/topic.entity';
+import { TodoEntity } from 'src/data/entity/todo.entity';
 
 @Module({
   imports: [
@@ -20,7 +23,7 @@ import { ToDoListUsersService } from 'src/api/service/todolist-users.service';
         signOptions: { expiresIn: configService.get('JWT_EXPIRATION') || '60m' },
       }),
     }),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity ,ProfileEntity ,TopicEntity, TodoEntity]),
   ],
   providers: [
     AuthService, 
